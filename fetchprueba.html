@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Fetch</title>
+</head>
+<body>
+  <button id="btn">Hacer una conexión con Ajax</button>
+
+
+
+  <form action="" method="POST" id="formulario" name="miform">
+
+  </form>
+  
+  <script>
+
+const data = new FormData(document.getElementById('formulario'));
+var contacto ={ nombre: "jeffry", apellido: "perez", telefono:"809-999-9999"};
+fetch('http://raydelto.org/agenda.php', {
+   method: 'POST',
+   body: JSON.stringify(contacto)
+})
+.then(function(response) {
+   if(response.ok) {
+       return response.text()
+   } else {
+       throw "Error en la llamada Ajax";
+   }
+
+})
+.then(function(texto) {
+   console.log(texto);
+})
+.catch(function(err) {
+   console.log(err);
+});
+
+
+  document.addEventListener('DOMContentLoaded', configureAjaxCalls);
+
+  function configureAjaxCalls() {
+    document.getElementById('btn').addEventListener('click', function() {
+      fetch('http://raydelto.org/agenda.php')
+        .then(ajaxPositive)
+        .catch(showError);
+    });
+
+    function ajaxPositive(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.text().then(showResult);
+      } else {
+        showError('status code: ' + response.status);
+      }
+    }
+
+    function showResult(txt) {
+      console.log('muestro respuesta: ', txt);
+    }
+
+    function showError(err) { 
+      console.log('muestor error', err);
+    }
+  }
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea3</title>
+    <script src="tarea3script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,wght@1,300&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" stylesheet="text/css" href="normalize.css">
+    <link rel="stylesheet" stylesheet="text/css" href="tarea3css.css">
+</head>
+<body onload="cargarContactos()">
+    <div class="flex-container">
+       <div class="flex-item" id="cuerpo">
+          cargando.....
+       </div>
+       
+    </div>
+
+    <form action="" method="POST" id="formulario" name="miform">
+
+
+        <script>
+            const data = new FormData(document.getElementById('formulario'));
+var contacto ={ nombre: "jeffry", apellido: "de jesus", telefono:"809-999-9999"};
+fetch('http://raydelto.org/agenda.php', {
+   method: 'POST',
+   body: JSON.stringify(contacto)
+})
+.then(function(response) {
+   if(response.ok) {
+       return response.text()
+   } else {
+       throw "Error en la llamada Ajax";
+   }
+
+})
+.then(function(texto) {
+   console.log(texto);
+})
+.catch(function(err) {
+   console.log(err);
+});
+
+
+  
+             </script>
+    
+</body>
+</html>
